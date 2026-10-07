@@ -63,6 +63,10 @@ def health_check(db: Session = Depends(get_db)):
 
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8080))
+    raw_port = os.environ.get("PORT", "8080")
+    try:
+        port = int(raw_port)
+    except (ValueError, TypeError):
+        port = 8080
     is_dev = settings.APP_ENV == "development"
     uvicorn.run("backend.app.main:app", host="0.0.0.0", port=port, reload=is_dev)
