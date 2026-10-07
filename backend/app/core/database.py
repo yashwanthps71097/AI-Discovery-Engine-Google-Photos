@@ -49,8 +49,11 @@ def get_db():
 
 def init_db():
     """Creates database tables if they do not exist."""
-    from backend.app.models.orm_models import (
-        DataSource, RawPost, ExtractedEvidence, 
-        ProblemCluster, ClusterEvidenceJunction, OpportunityArea
-    )
-    Base.metadata.create_all(bind=engine)
+    try:
+        from backend.app.models.orm_models import (
+            DataSource, RawPost, ExtractedEvidence, 
+            ProblemCluster, ClusterEvidenceJunction, OpportunityArea
+        )
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        logger.error(f"Error during init_db: {e}. Continuing with existing schema.")
