@@ -1,0 +1,266 @@
+# Problem Statement: AI-Powered Discovery Engine for Google Photos Retrieval
+
+## Context
+
+Google Photos users accumulate thousands of photos, videos, screenshots, and documents over several years. When users want to retrieve an old or difficult-to-find photo, they may remember that the photo exists but may not remember precise details such as the exact date, location, album, filename, or search keywords.
+
+The goal is to understand **how people actually remember and retrieve difficult-to-find photos**, and identify where the retrieval journey breaks down.
+
+This is a discovery problem, not a solution-generation problem.
+
+## Objective
+
+Build an AI-powered Discovery Engine that analyzes publicly available user conversations about Google Photos and photo retrieval at scale.
+
+The engine should go beyond sentiment analysis or simple summarization.
+
+It must identify, compare, and cluster **different photo-retrieval problems and opportunity areas using evidence from real users.**
+
+## Sources
+
+Analyze publicly available content from:
+
+* Google Play Store reviews
+* Apple App Store reviews
+* Reddit
+* Google Photos Help / Community discussions
+* YouTube comments
+* Public forums
+* Relevant social media discussions
+* Other publicly available sources discussing photo retrieval
+
+Prioritize sources where users describe an actual retrieval experience, difficulty, workaround, or failed search.
+
+## What the AI should extract
+
+For each relevant user conversation, identify:
+
+### 1. Retrieval scenario
+
+What photo is the user trying to find?
+
+Examples:
+
+* Old family photo
+* Childhood photo
+* Travel photo
+* Photo with a specific person
+* Event photo
+* Food photo
+* Screenshot
+* Document
+* Nature photo
+
+### 2. What the user remembers
+
+Extract the types of information the user naturally uses to describe the memory:
+
+* People
+* Relationships
+* Activities
+* Events
+* Places or settings
+* Objects
+* Visual appearance
+* Approximate time
+* Story/context
+* Emotion or significance
+* Sequence of events
+
+Do not assume these categories are correct beforehand. Allow the AI to discover additional categories from the data.
+
+### 3. What the user does NOT remember
+
+Identify missing or uncertain information such as:
+
+* Exact date
+* Exact time
+* Exact location
+* Person's name
+* Event name
+* Album
+* Filename
+* Search keywords
+* Other retrieval details
+
+### 4. Search behavior
+
+Identify what the user actually does to find the photo:
+
+* Searches by person
+* Searches by location
+* Searches by event
+* Searches by object/activity
+* Uses natural-language search
+* Scrolls the timeline
+* Opens albums
+* Tries multiple queries
+* Uses another application
+* Asks someone else
+* Gives up
+* Other
+
+### 5. Retrieval failure point
+
+Classify where the journey breaks:
+
+* Cannot recall enough information
+* Cannot express the memory as a search query
+* Does not know what to search
+* Search interpretation does not match intent
+* Too many results
+* Results are not relevant
+* Relevant photo is difficult to recognize
+* Cannot refine a failed search
+* Search requires too much effort
+* Other
+
+### 6. Workaround
+
+Identify what the user does when retrieval fails.
+
+### 7. User outcome
+
+Classify the result:
+
+* Successfully retrieved
+* Retrieved after multiple attempts
+* Retrieved through manual browsing
+* Retrieved using another method
+* Could not retrieve
+* Outcome unknown
+
+## Cross-source analysis
+
+After extracting individual conversations, cluster them into broader retrieval problems.
+
+For every cluster, show:
+
+* Problem name
+* Description
+* Frequency
+* Severity indicators
+* Retrieval impact
+* Common user behavior
+* Common workaround
+* Sources where it appears
+* Representative evidence
+* Potential opportunity area
+
+Do not create arbitrary scores without evidence.
+
+## Important research question
+
+Investigate whether there is a mismatch between:
+
+**How people remember a photo**
+
+and
+
+**How they attempt to retrieve the photo.**
+
+Specifically investigate whether users naturally remember contextual or experiential information such as:
+
+* Who was there
+* What they were doing
+* What happened
+* What the occasion was
+* What the environment looked like
+* What made the moment memorable
+
+while having less precise information such as:
+
+* Exact date
+* Exact location
+* Exact filename
+* Exact search terminology
+
+Treat this as a **hypothesis to validate through evidence**, not as a predetermined conclusion.
+
+## Required output
+
+Create an interactive research dashboard with:
+
+### Dashboard 1 — Source Overview
+
+* Number of sources analyzed
+* Number of relevant retrieval conversations
+* Source distribution
+* Date range
+* Source links
+
+### Dashboard 2 — Retrieval Scenarios
+
+Show the most common types of difficult-to-find photos.
+
+### Dashboard 3 — Memory Patterns
+
+Show:
+
+* What users remember
+* What users forget
+* Relationship between remembered and missing information
+
+### Dashboard 4 — Search Behavior
+
+Show how users actually attempt retrieval.
+
+### Dashboard 5 — Retrieval Failure Map
+
+Visualize where retrieval breaks in the journey:
+
+Memory → Query → Search → Results → Refinement → Recognition → Retrieval
+
+### Dashboard 6 — Problem Clusters
+
+Show the major retrieval problems discovered from the data.
+
+For each cluster provide evidence from multiple users/sources where available.
+
+### Dashboard 7 — Opportunity Areas
+
+Identify potential product opportunity areas based on the strongest evidence.
+
+Do NOT propose a final product solution yet.
+
+## Evidence requirements
+
+Every important finding must be traceable to the original public source.
+
+For each evidence item store:
+
+* Source
+* URL
+* Date if available
+* User statement / short excerpt
+* Extracted retrieval scenario
+* Extracted memory clues
+* Missing information
+* Search behavior
+* Failure point
+* Cluster
+
+Clearly distinguish:
+
+**Observed user evidence → AI interpretation → Opportunity hypothesis**
+
+Do not present an AI inference as if it were a direct user statement.
+
+## Final research output
+
+Generate a concise executive summary answering:
+
+1. What kinds of photos are hardest to retrieve?
+2. What information do users naturally remember?
+3. What information do users commonly lack?
+4. How do users search when memory is incomplete?
+5. Where does retrieval most frequently break?
+6. What workarounds do users use?
+7. Which retrieval problems appear across multiple sources?
+8. Which opportunity areas deserve further validation through primary research?
+
+The system should help a Product Manager move from:
+
+**Public User Evidence → Retrieval Behavior → Problem Clusters → Opportunity Areas → Primary Research Questions**
+
+Do not generate a final solution unless explicitly asked.
