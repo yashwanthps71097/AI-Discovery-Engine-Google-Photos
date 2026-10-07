@@ -5,11 +5,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://YOUR-RAILWAY-BACKEND-URL.up.railway.app/api/:path*"
+      "destination": "https://web-production-cd992.up.railway.app/api/:path*"
     },
     {
       "source": "/health",
-      "destination": "https://YOUR-RAILWAY-BACKEND-URL.up.railway.app/health"
+      "destination": "https://web-production-cd992.up.railway.app/health"
     },
     {
       "source": "/(.*)",
