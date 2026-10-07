@@ -1,6 +1,6 @@
 import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text
@@ -23,6 +23,19 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Handle HTTP HEAD requests for uptime monitors (e.g. UptimeRobot)
+@app.middleware("http")
+async def handle_head_requests(request: Request, call_next):
+    """Gracefully handle HTTP HEAD requests sent by monitoring services like UptimeRobot."""
+    if request.method == "HEAD":
+        request.scope["method"] = "GET"
+        response = await call_next(request)
+        return Response(
+            status_code=response.status_code,
+            headers=dict(response.headers)
+        )
+    return await call_next(request)
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
@@ -35,7 +48,7 @@ app.add_middleware(
 from backend.app.api.v1.endpoints import router as api_v1_router
 app.include_router(api_v1_router)
 
-@app.get("/", tags=["Root"])
+@app.api_route("/", methods=["GET", "HEAD"], tags=["Root"])
 def root():
     return {
         "app": settings.APP_NAME,
@@ -44,7 +57,7 @@ def root():
         "health": "/health"
     }
 
-@app.get("/health", response_model=HealthCheckResponse, tags=["Health"])
+@app.api_route("/health", methods=["GET", "HEAD"], response_model=HealthCheckResponse, tags=["Health"])
 def health_check(db: Session = Depends(get_db)):
     db_ok = False
     try:
