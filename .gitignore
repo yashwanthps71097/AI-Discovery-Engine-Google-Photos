@@ -37,10 +37,11 @@ yarn-error.log*
 out/
 
 # Database & local vector storage
-data/
+/data/
 *.sqlite3
 *.db
 !discovery_engine.db
+!frontend/src/data/**
 
 # Cache & Testing
 .pytest_cache/
